@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Галерея</title>
+        <style type="text/css">
+            body {
+                background-color: rgba(123, 211, 211, 0.925);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed
+            }
+    
+            .menu {
+                display: inline-block;
+                border: 3px solid #3816d1f3;
+                border-radius: 10px;
+                background-color: rgba(113, 160, 190, 0.925);
+                text-align: center;
+                padding: 10px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                font-family: Comic Sans MS;
+            }
+    
+            @media (max-width: 1500px) {
+                html {
+                    font-size: 10px;
+                }
+            }
+    
+            .menu:hover,
+            .foto:hover {
+                outline: 5px solid rgb(25, 0, 255);
+            }
+    
+            .knopkaLevo {
+                position: absolute;
+                width: 40%;
+                height: 40%;
+                background: url("strelka levo.png");
+                background-size: cover;
+                display: inline-block;
+            }
+    
+            .knopkaLevo:hover {
+                background-image: url("strelka levo_hover.png")
+            }
+    
+            .knopkaPravo {
+                position: absolute;
+                left: 50%;
+                width: 40%;
+                height: 40%;
+                background: url("strelka pravo.png");
+                background-size: cover;
+                display: inline-block;
+            }
+    
+            .knopkaPravo:hover {
+                background-image: url("strelka pravo_ hover.png")
+            }
+        </style>
+    </head>
+    
+    <body>
+    
+        <div style="position:fixed; margin-left:1%; top:2%; width:70%; height:85%;
+        background-image: url(ramka.png);
+        background-repeat: no-repeat;
+        /* background-attachment: fixed; */
+        background-size: cover;
+        background-position:center center ; ">
+        </div>
+    
+        <div style="position:fixed; left:4.6%; top:13%; width:63%; height:64%">
+    
+            <video style="top:0;left:0; bottom:0; right: 0; max-height: 100%;max-width: 100%; min-width: 90%;min-height: 90%; display: block; margin: auto;"
+             controls="controls" poster="Do_evakuazii/zastavka.jpg" id="img" autoplay>
+                <src="bla-bla-bla" type='video/ogg; codecs="theora, vorbis"'>
+                    <src="bla-bla-bla" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                        <src="bla-bla-bla" type='video/webm; codecs="vp8, vorbis"'>
+                            Тег video не поддерживается вашим браузером.
+                            <a href="bla-bla-bla">Скачайте видео</a>.
+            </video>
+        </div>
+    
+            <div style="position: fixed;top: 85%; left: 26%; width: 20%; height: 30%; z-index: 999;">
+                <div class="knopkaLevo" onClick="javascript: left_arrow()"></div>
+                <div class="knopkaPravo" onClick="javascript: right_arrow()"></div>
+        
+            </div>
+        
+            <div style="position: fixed;top: 82%; left: 15%; width: 30%; height: 30%;">
+                <img src="dancing-cat.gif" class="kartinka" style="position: absolute;display: inline-block;width: 50%;">
+                <img src="dancing-cat.gif" class="kartinka"
+                    style="position: absolute;left: 82%; display: inline-block; width: 50%;">
+        
+            </div>
+        
+            <div style=" position:fixed; z-index: 999; left: 70%; top: 2.5%; right: 30px; text-align:center">
+                <div id="glavnay" class="menu" onclick="location.href = 'index.html'">
+                    На <br> главную
+                </div>
+                <div id="pismo" class="menu">
+                    Написать <br> письмо
+                </div>
+                <div id="Nakorm" class="menu">
+                    Покорми<br>эвакуированного
+                </div>
+            </div>
+    
+            <div id="results" style=" margin-left: 70%; margin-top: 7%; text-align: center;"></div>
+
+    <script>
+        var mas = [101, 102,] // массив видео
+        var to = 0;  // Счетчик, указывающий на текущую картинки
+
+        function right_arrow() // Открытие следующей картинки(движение вправо)
+        {
+            var obj = document.getElementById("img");
+            if (to < mas.length - 1) to++
+            else
+                to = 0;
+            obj.src = "v_evakuazii\/" + mas[to] + ".mp4";
+        }
+
+        function left_arrow() // Открытие предыдущей картинки(движение влево)
+        {
+            var obj = document.getElementById("img");
+            if (to > 0) to--;
+            else
+                to = mas.length - 1;
+            obj.src = "v_evakuazii\/" + mas[to] + ".mp4";
+        }
+
+        mas.forEach((item, index) => {    //Добавление иконок
+            let elem = document.createElement("video");
+            elem.setAttribute("src", "v_evakuazii/" + item + ".mp4");
+            elem.setAttribute("height", "150");
+            elem.setAttribute("width", "150");
+            elem.setAttribute("alt", "кликни");
+            elem.setAttribute("title", "кликни");
+            elem.setAttribute("style", "margin: 3px");
+            elem.setAttribute("class", "foto");
+            elem.setAttribute("style", "border: 10px double black;");
+            document.getElementById("results").appendChild(elem);
+
+            elem.onclick = function (event) { //клик на иконки
+                var obj = document.getElementById("img");
+                obj.src = "v_evakuazii\/" + item + ".mp4";
+                to = item - 1;
+            };
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
